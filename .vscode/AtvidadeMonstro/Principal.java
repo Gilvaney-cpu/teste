@@ -15,8 +15,8 @@ public class Principal {
 
         System.out.println(((Cacador) m2).tempoDeCaca());
 
-        m2 = new Cacador(); // Corrigido de Hunter para Cacador
-        ((Cacador) m2).cacarECapturar();
+      //   m2 = new Cacador(); // uma classe abstrata não pode ser instanciada diretamente.
+      //  ((Cacador) m2).cacarECapturar();
 
         ((ICorredor) m1).correEAtaca();
 
