@@ -1,0 +1,82 @@
+
+Vamos analisar os erros no código da classe Principal:
+
+Erro de compilação:
+
+IRastejador c1 = new Ogro();
+c1 = m1;
+c1.rastejaEAtaca();
+Justificativa: O objeto m1 é do tipo Monstro, que não implementa a interface IRastejador. Portanto, não é possível atribuir m1 a c1, que é do tipo IRastejador.
+
+Correção: Remover as linhas referentes a c1 ou criar um objeto que implemente IRastejador para essa atribuição.
+
+Erro de compilação:
+
+ICorredor r1 = (Cuspidor) m1;
+Justificativa: O objeto m1 é do tipo Monstro e não implementa a interface ICorredor. Tentar fazer o cast direto para Cuspidor resultará em um erro de compilação.
+
+Correção: Remover essa linha ou alterar o tipo do objeto para um que implemente ICorredor.
+
+Erro de compilação:
+
+m2 = new Hunter();
+Justificativa: A classe Hunter não está definida no código fornecido. Parece ser um erro de digitação, e a classe correta seria Cacador.
+
+Correção: Substituir Hunter por Cacador.
+
+Erro de compilação:
+
+m2 = c1;
+Justificativa: O objeto c1 é do tipo IRastejador, e m2 é do tipo Monstro. Não é possível atribuir diretamente um objeto do tipo IRastejador a uma variável do tipo Monstro.
+
+Correção: Remover essa linha ou alterar o tipo da variável m2 para IRastejador.
+
+Erro de execução (ClassCastException):
+
+((Cacador) m2).cacarECapturar();
+Justificativa: O objeto referenciado por m2 no momento dessa chamada não é uma instância de Cacador. Tentar fazer o cast para Cacador resultará em ClassCastException.
+
+Correção: Certificar-se de que o objeto referenciado por m2 é uma instância de Cacador antes de fazer o cast.
+
+Após corrigir os erros mencionados, o código corrigido da classe Principal seria algo como:
+
+public class Principal {
+    public static void main(String[] args) {
+        Monstro m1 = new Cuspidor();
+        Monstro m2 = new SerialKiller();
+
+        System.out.println("Is m2 standing: " + m2.estouEmPe());
+
+        IRastejador c1 = new Ogro();
+        c1.rastejaEAtaca();
+
+        c1 = new TRex();
+
+        ICorredor r1 = (ICorredor) m1;
+        r1.correEAtaca();
+
+        System.out.println(((Cacador) m2).tempoDeCaca());
+
+        m2 = new Cacador(); // Corrigido de Hunter para Cacador
+        ((Cacador) m2).cacarECapturar();
+
+        ((ICorredor) m1).correEAtaca();
+
+        m1 = new TRex();
+        ICorredor r2 = new TRex();
+        m2 = r2;
+
+        System.out.println(m1.huntingTime());
+        ((ICorredor) m1).correEAtaca();
+
+        System.out.println(((Cacador) r2).tempoDeCaca());
+
+        r1.correEAtaca();
+    }
+}
+Note que a correção envolve a substituição de Hunter por Cacador, ajustes nos casts e a criação de instâncias apropriadas para atribuições.
+
+
+
+
+
